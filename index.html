@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FutCoach10 — Formación de Entrenadores de Fútbol</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:    #0B1F4B;
+  --navy-d:  #081539;
+  --navy-l:  #132860;
+  --yellow:  #F5C800;
+  --sky:     #5BA4D4;
+  --white:   #FFFFFF;
+  --off:     #E8EDF5;
+  --muted:   #7A90B8;
+  --border:  rgba(91,164,212,0.18);
+  --border-y:rgba(245,200,0,0.25);
+  --radius:  10px;
+  --fh: 'Bebas Neue', sans-serif;
+  --fc: 'Barlow Condensed', sans-serif;
+  --fb: 'Inter', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--navy); color: var(--white); font-family: var(--fb); font-size:16px; line-height:1.6; overflow-x:hidden; }
+a { color:inherit; text-decoration:none; }
+
+/* ── NAV ── */
+nav {
+  position:sticky; top:0; z-index:200;
+  background:rgba(8,21,57,.97); backdrop-filter:blur(16px);
+  border-bottom:2px solid var(--yellow);
+  padding:0 28px; height:66px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo-wrap { display:flex; flex-direction:column; gap:0; line-height:1; }
+.logo-row  { display:flex; align-items:baseline; }
+.lw { font-family:var(--fh); font-size:26px; color:var(--white); letter-spacing:1px; }
+.l10{ font-family:var(--fh); font-size:32px; color:var(--yellow); line-height:1; }
+.lsub{ font-family:var(--fc); font-size:9px; letter-spacing:3px; color:var(--sky); text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+.nav-links a { font-family:var(--fc); font-size:14px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--off); opacity:.8; transition:opacity .2s; }
+.nav-links a:hover { opacity:1; color:var(--yellow); }
+.nav-links .cta a { background:var(--yellow); color:var(--navy-d); padding:8px 20px; border-radius:6px; font-weight:800; opacity:1; transition:background .2s,transform .15s; }
+.nav-links .cta a:hover { background:#FFD700; transform:translateY(-1px); }
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.hamburger span { display:block; width:26px; height:2px; background:var(--white); border-radius:2px; transition:all .3s; }
+.mob-menu { display:none; flex-direction:column; background:var(--navy-d); border-bottom:2px solid var(--yellow); padding:8px 28px 20px; }
+.mob-menu.open { display:flex; }
+.mob-menu a { font-family:var(--fc); font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; padding:12px 0; border-bottom:1px solid var(--border); color:var(--off); transition:color .2s; }
+.mob-menu a:last-child { border-bottom:none; color:var(--yellow); }
+
+/* ── HERO ── */
+.hero {
+  min-height:calc(100vh - 66px);
+  display:flex; align-items:center;
+  padding:72px 28px; position:relative; overflow:hidden;
+  background:linear-gradient(135deg,var(--navy-d) 0%,var(--navy) 60%,#0D2B6B 100%);
+}
+.hero::before { content:''; position:absolute; top:-80px; right:-80px; width:520px; height:520px; background:var(--yellow); opacity:.06; transform:rotate(22deg); border-radius:40px; pointer-events:none; }
+.hero::after  { content:''; position:absolute; bottom:-60px; left:-60px; width:340px; height:340px; background:var(--sky); opacity:.07; border-radius:50%; pointer-events:none; }
+.hero-inner { max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 420px; gap:56px; align-items:center; position:relative; z-index:1; width:100%; }
+.hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(245,200,0,.12); border:1px solid rgba(245,200,0,.35); color:var(--yellow); font-family:var(--fc); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 16px; border-radius:100px; margin-bottom:22px; }
+.hero h1 { font-family:var(--fh); font-size:clamp(56px,7.5vw,96px); line-height:.96; letter-spacing:.5px; margin-bottom:22px; }
+.hero h1 .y { color:var(--yellow); }
+.hero h1 .b { color:var(--sky); }
+.hero-desc { font-size:17px; color:var(--off); opacity:.8; max-width:500px; line-height:1.7; margin-bottom:36px; }
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:14px 30px; border-radius:8px; font-family:var(--fc); font-weight:800; font-size:16px; letter-spacing:.5px; text-transform:uppercase; cursor:pointer; transition:all .2s; border:none; }
+.btn-y { background:var(--yellow); color:var(--navy-d); }
+.btn-y:hover { background:#FFD700; transform:translateY(-2px); box-shadow:0 8px 24px rgba(245,200,0,.3); }
+.btn-o { background:transparent; color:var(--white); border:2px solid var(--sky); }
+.btn-o:hover { background:var(--sky); color:var(--navy-d); }
+.btn-n { background:var(--navy-d); color:var(--yellow); }
+.btn-n:hover { background:var(--navy); transform:translateY(-2px); }
+.btn-lg { padding:16px 40px; font-size:17px; }
+.btn-sm { padding:9px 20px; font-size:13px; border-radius:6px; }
+
+/* Hero panel */
+.hero-panel { background:var(--navy-d); border:1px solid var(--border); border-top:3px solid var(--yellow); border-radius:var(--radius); overflow:hidden; }
+.hp-head { background:var(--yellow); padding:14px 24px; font-family:var(--fh); font-size:20px; color:var(--navy-d); letter-spacing:1px; }
+.hp-body { padding:24px; }
+.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.stat-box { background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:8px; padding:18px; text-align:center; }
+.stat-box .n { font-family:var(--fh); font-size:40px; line-height:1; color:var(--yellow); }
+.stat-box .l { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
+.pill-row { display:flex; flex-wrap:wrap; gap:8px; }
+.pill { background:rgba(91,164,212,.12); border:1px solid rgba(91,164,212,.3); color:var(--sky); font-family:var(--fc); font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:5px 12px; border-radius:100px; }
+
+/* ── SECTIONS ── */
+.sec { padding:86px 28px; }
+.sec-alt { background:var(--navy-d); }
+.inner { max-width:1120px; margin:0 auto; }
+.eyebrow { font-family:var(--fc); font-size:12px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--sky); margin-bottom:10px; }
+.s-title { font-family:var(--fh); font-size:clamp(38px,5vw,60px); line-height:1; margin-bottom:14px; }
+.s-title .y { color:var(--yellow); }
+.s-sub { color:var(--muted); font-size:16px; max-width:540px; line-height:1.7; }
+.s-head { margin-bottom:52px; }
+.s-head.center { text-align:center; }
+.s-head.center .s-sub { margin:0 auto; }
+hr.rule { border:none; border-top:1px solid var(--border); }
+
+/* ── COURSES ── */
+.courses-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.c-card { background:var(--navy-d); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; transition:transform .25s,border-color .25s,box-shadow .25s; }
+.c-card:hover { transform:translateY(-5px); border-color:var(--yellow); box-shadow:0 16px 40px rgba(0,0,0,.4); }
+.c-card.feat { border-color:var(--yellow); }
+.c-top { background:var(--yellow); padding:10px 20px; font-family:var(--fc); font-size:13px; font-weight:800; color:var(--navy-d); letter-spacing:1.5px; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; }
+.c-top.blue { background:var(--sky); }
+.c-top .star { font-size:11px; background:var(--navy-d); color:var(--yellow); padding:2px 8px; border-radius:100px; }
+.c-body { padding:28px; flex:1; display:flex; flex-direction:column; }
+.c-body h3 { font-family:var(--fh); font-size:30px; line-height:1; margin-bottom:4px; }
+.c-body .grade { font-family:var(--fc); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--sky); margin-bottom:16px; }
+.c-body p { font-size:14px; color:var(--muted); line-height:1.65; flex:1; margin-bottom:20px; }
+.feat-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.feat-list li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--off); }
+.feat-list li::before { content:'✓'; color:var(--yellow); font-weight:800; font-size:12px; flex-shrink:0; margin-top:2px; }
+.c-foot { padding:16px 28px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.c-foot .tag { font-family:var(--fc); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+.extra-banner { margin-top:32px; background:var(--navy-d); border:1px solid var(--border); border-left:4px solid var(--sky); border-radius:var(--radius); padding:28px 32px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; }
+.extra-banner h3 { font-family:var(--fh); font-size:26px; margin-bottom:4px; }
+.extra-banner p { font-size:13px; color:var(--muted); }
+
+/* ── ABOUT ── */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.about-text p { color:var(--muted); font-size:16px; line-height:1.75; margin-bottom:16px; }
+.trust-strip { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+.trust-chip { background:rgba(245,200,0,.08); border:1px solid rgba(245,200,0,.25); color:var(--yellow); font-family:var(--fc); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:6px 14px; border-radius:6px; display:flex; align-items:center; gap:6px; }
+.about-cards { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.a-card { background:var(--navy-d); border:1px solid var(--border); border-radius:var(--radius); padding:24px 20px; text-align:center; transition:border-color .2s; }
+.a-card:hover { border-color:var(--sky); }
+.a-card .ico { font-size:30px; margin-bottom:10px; }
+.a-card h4 { font-family:var(--fh); font-size:20px; color:var(--yellow); margin-bottom:4px; }
+.a-card p { font-size:12px; color:var(--muted); line-height:1.5; }
+.a-card.wide { grid-column:1/-1; }
+.a-card.wide h4 { font-size:26px; }
+
+/* ── TEAM ── */
+.team-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+.t-card { background:var(--navy-d); border:1px solid var(--border); border-radius:var(--radius); padding:28px 16px; text-align:center; transition:border-color .25s,transform .25s; }
+.t-card:hover { border-color:var(--yellow); transform:translateY(-3px); }
+.t-av { width:68px; height:68px; border-radius:50%; background:rgba(245,200,0,.1); border:2px solid var(--yellow); display:flex; align-items:center; justify-content:center; font-family:var(--fh); font-size:22px; color:var(--yellow); margin:0 auto 14px; }
+.t-card h4 { font-family:var(--fc); font-size:15px; font-weight:700; margin-bottom:6px; }
+.t-card p { font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* ── CTA BAND ── */
+.cta-band { background:var(--yellow); padding:80px 28px; text-align:center; position:relative; overflow:hidden; }
+.cta-band::before { content:''; position:absolute; top:-60px; right:-60px; width:280px; height:280px; background:rgba(0,0,0,.07); border-radius:50%; pointer-events:none; }
+.cta-band h2 { font-family:var(--fh); font-size:clamp(44px,6vw,78px); color:var(--navy-d); line-height:.95; margin-bottom:16px; position:relative; z-index:1; }
+.cta-band p { font-size:17px; color:rgba(11,31,75,.7); max-width:480px; margin:0 auto 36px; position:relative; z-index:1; }
+
+/* ── FAQ ── */
+.faq-wrap { max-width:740px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+.faq-item { background:var(--navy-d); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.faq-btn { width:100%; background:none; border:none; color:var(--white); font-family:var(--fb); font-size:15px; font-weight:600; padding:20px 24px; text-align:left; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; transition:color .2s; }
+.faq-btn:hover { color:var(--yellow); }
+.faq-icon { font-size:20px; color:var(--yellow); flex-shrink:0; transition:transform .25s; }
+.faq-btn.open .faq-icon { transform:rotate(45deg); }
+.faq-ans { display:none; padding:0 24px 20px; font-size:14px; color:var(--muted); line-height:1.7; }
+.faq-ans.open { display:block; }
+
+/* ── CONTACT ── */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:start; }
+.ci { display:flex; align-items:flex-start; gap:16px; margin-bottom:22px; }
+.ci-ico { width:46px; height:46px; border-radius:10px; background:rgba(245,200,0,.1); border:1px solid rgba(245,200,0,.3); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.ci h5 { font-family:var(--fc); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:4px; }
+.ci p { font-size:15px; color:var(--white); }
+.form-box { display:flex; flex-direction:column; gap:14px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-box label { font-family:var(--fc); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px; display:block; }
+.form-box input,.form-box textarea,.form-box select { width:100%; background:var(--navy-d); border:1px solid var(--border); border-radius:8px; padding:12px 16px; color:var(--white); font-family:var(--fb); font-size:14px; outline:none; transition:border-color .2s; }
+.form-box input:focus,.form-box textarea:focus,.form-box select:focus { border-color:var(--yellow); }
+.form-box textarea { resize:vertical; min-height:100px; }
+.form-box select option { background:var(--navy-d); }
+.form-note { font-size:12px; color:var(--muted); text-align:center; }
+.form-note a { color:var(--sky); }
+.status-msg { display:none; padding:12px 16px; border-radius:8px; font-size:14px; font-weight:600; text-align:center; }
+.status-msg.ok   { display:block; background:rgba(29,185,84,.12); border:1px solid rgba(29,185,84,.3); color:#1DB954; }
+.status-msg.err  { display:block; background:rgba(255,77,77,.12); border:1px solid rgba(255,77,77,.3); color:#FF6B6B; }
+
+/* ── FOOTER ── */
+footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:56px 28px 28px; }
+.f-grid { max-width:1120px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:44px; }
+.f-brand h3 { font-family:var(--fh); font-size:28px; color:var(--yellow); margin-bottom:14px; }
+.f-brand p { font-size:13px; color:var(--muted); line-height:1.65; max-width:260px; }
+.f-col h5 { font-family:var(--fc); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--yellow); margin-bottom:16px; }
+.f-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.f-col ul li a { font-size:13px; color:var(--muted); transition:color .2s; }
+.f-col ul li a:hover { color:var(--white); }
+.f-bottom { max-width:1120px; margin:0 auto; border-top:1px solid var(--border); padding-top:22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.f-bottom p { font-size:12px; color:var(--muted); }
+.soc-row { display:flex; gap:10px; }
+.soc-btn { width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,.05); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:border-color .2s,color .2s; cursor:pointer; }
+.soc-btn:hover { border-color:var(--yellow); color:var(--yellow); }
+.soc-btn svg { width:16px; height:16px; fill:currentColor; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav-links{display:none;} .hamburger{display:flex;}
+  .hero-inner{grid-template-columns:1fr;} .hero-panel{display:none;}
+  .courses-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:repeat(2,1fr);}
+  .contact-grid{grid-template-columns:1fr;}
+  .f-grid{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+@media(max-width:520px){
+  .f-grid{grid-template-columns:1fr;} .team-grid{grid-template-columns:repeat(2,1fr);}
+  .about-cards{grid-template-columns:1fr;} .a-card.wide{grid-column:1;}
+  .hero h1{font-size:54px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" style="text-decoration:none;">
+    <div class="logo-wrap">
+      <div class="logo-row"><span class="lw">FUTCOACH</span><span class="l10">10</span></div>
+      <span class="lsub">FORMACIÓN</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li class="cta"><a href="inscripcion.html">Inscribirme</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#cursos" onclick="toggleMenu()">Cursos</a>
+  <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
+  <a href="#equipo" onclick="toggleMenu()">Equipo docente</a>
+  <a href="#faq" onclick="toggleMenu()">Preguntas frecuentes</a>
+  <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+  <a href="inscripcion.html">→ Inscribirme ahora</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">⚽ Escuela Oficial · RFEF · Ministerio de Educación</div>
+      <h1>¿QUIERES<br><span class="y">ENTRENAR?</span><br><span class="b">ÚNETE A</span><br>NOSOTROS</h1>
+      <p class="hero-desc">Formación oficial de entrenadores de fútbol homologada por el Ministerio de Educación y la RFEF. Cursos presenciales con profesionales del fútbol español.</p>
+      <div class="hero-btns">
+        <a href="#cursos" class="btn btn-y">Ver cursos disponibles</a>
+        <a href="#nosotros" class="btn btn-o">Conocer más</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-head">NUESTROS RESULTADOS</div>
+      <div class="hp-body">
+        <div class="stat-grid">
+          <div class="stat-box"><div class="n">+500</div><div class="l">Alumnos formados</div></div>
+          <div class="stat-box"><div class="n">3</div><div class="l">Niveles oficiales</div></div>
+          <div class="stat-box"><div class="n">10+</div><div class="l">Años de experiencia</div></div>
+          <div class="stat-box"><div class="n">95%</div><div class="l">Satisfacción</div></div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">✓ Oficial RFEF</span>
+          <span class="pill">✓ Ministerio Educación</span>
+          <span class="pill">✓ Acceso Universidad</span>
+          <span class="pill">✓ Titulación Nacional</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- CURSOS -->
+<section class="sec sec-alt" id="cursos">
+  <div class="inner">
+    <div class="s-head">
+      <div class="eyebrow">Formación oficial</div>
+      <h2 class="s-title">Técnico Deportivo en <span class="y">Fútbol</span></h2>
+      <p class="s-sub">Enseñanzas regladas pertenecientes al sistema educativo del Ministerio de Educación, Cultura y Deporte.</p>
+    </div>
+    <div class="courses-grid">
+      <div class="c-card">
+        <div class="c-top blue">Nivel I</div>
+        <div class="c-body">
+          <h3>Certificación Nivel I</h3>
+          <div class="grade">Iniciación al entrenamiento</div>
+          <p>Primer paso para convertirte en entrenador oficial. Aprende las bases del fútbol y la pedagogía deportiva con nuestros expertos.</p>
+          <ul class="feat-list">
+            <li>Fundamentos tácticos y técnicos</li>
+            <li>Metodología del entrenamiento</li>
+            <li>Psicología deportiva básica</li>
+            <li>Certificado oficial homologado</li>
+          </ul>
+        </div>
+        <div class="c-foot">
+          <span class="tag">Formación oficial</span>
+          <a href="#contacto" class="btn btn-y btn-sm">Me interesa</a>
+        </div>
+      </div>
+      <div class="c-card feat">
+        <div class="c-top">Nivel II &nbsp;<span class="star">⭐ Popular</span></div>
+        <div class="c-body">
+          <h3>Técnico Deportivo Grado Medio</h3>
+          <div class="grade">Formación profesional reglada</div>
+          <p>Equivalente al antiguo Entrenador Regional. Título de Formación Profesional de Grado Medio reconocido a nivel nacional.</p>
+          <ul class="feat-list">
+            <li>Planificación y periodización</li>
+            <li>Análisis del rendimiento</li>
+            <li>Nutrición y preparación física</li>
+            <li>Acceso al mercado laboral</li>
+          </ul>
+        </div>
+        <div class="c-foot">
+          <span class="tag">Grado Medio oficial</span>
+          <a href="#contacto" class="btn btn-y btn-sm">Quiero saber más</a>
+        </div>
+      </div>
+      <div class="c-card">
+        <div class="c-top blue">Nivel III</div>
+        <div class="c-body">
+          <h3>Técnico Deportivo Grado Superior</h3>
+          <div class="grade">La cima del entrenamiento</div>
+          <p>El título más avanzado. Equivalente al antiguo Entrenador Nacional. Acceso directo a la Universidad y al fútbol profesional.</p>
+          <ul class="feat-list">
+            <li>Alta competición y fútbol profesional</li>
+            <li>Dirección y gestión deportiva</li>
+            <li>Scouting y análisis de datos</li>
+            <li>Acceso a la Universidad</li>
+          </ul>
+        </div>
+        <div class="c-foot">
+          <span class="tag">Grado Superior oficial</span>
+          <a href="#contacto" class="btn btn-y btn-sm">Mi futuro</a>
+        </div>
+      </div>
+    </div>
+    <div class="extra-banner">
+      <div>
+        <h3>Cursos complementarios</h3>
+        <p>Director deportivo · Preparación del portero · Scouting · Análisis táctico</p>
+      </div>
+      <a href="#contacto" class="btn btn-o" style="font-size:14px;padding:11px 24px;">Consultar disponibilidad →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ABOUT -->
+<section class="sec" id="nosotros">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="eyebrow">Quiénes somos</div>
+        <h2 class="s-title">Creados por <span class="y">profesionales</span>,<br>para futuros entrenadores</h2>
+        <p>FutCoach10 es una escuela creada por exjugadores y entrenadores profesionales del fútbol español, con la misión de transmitir toda nuestra experiencia dentro del mundo del fútbol.</p>
+        <p>Nos basamos en la calidad, seriedad y compromiso de todos los integrantes de esta escuela. Formación avalada por el Ministerio de Educación y la Real Federación Española de Fútbol (RFEF).</p>
+        <div class="trust-strip">
+          <span class="trust-chip">🏛 Ministerio de Educación</span>
+          <span class="trust-chip">⚽ RFEF Homologado</span>
+          <span class="trust-chip">🎓 Acceso Universidad</span>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="a-card"><div class="ico">🎯</div><h4>Calidad</h4><p>Formación de alto nivel impartida por profesionales</p></div>
+        <div class="a-card"><div class="ico">🤝</div><h4>Compromiso</h4><p>Acompañamos a cada alumno durante todo su proceso</p></div>
+        <div class="a-card wide"><div class="ico">🏆</div><h4>Resultados reales</h4><p style="max-width:400px;margin:6px auto 0;font-size:14px;color:var(--muted)">Más de 500 entrenadores formados con nosotros ya trabajan en clubes de toda España</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- TEAM -->
+<section class="sec sec-alt" id="equipo">
+  <div class="inner">
+    <div class="s-head center">
+      <div class="eyebrow">Nuestro equipo docente</div>
+      <h2 class="s-title">Fórmate con los <span class="y">mejores</span></h2>
+      <p class="s-sub">Profesionales con trayectorias reales en el fútbol español, que comparten su experiencia contigo.</p>
+    </div>
+    <div class="team-grid">
+      <div class="t-card"><div class="t-av">AS</div><h4>Anselmo Serrano</h4><p>Técnico Deportivo Superior Nivel III y Scouting con más de 2 años de experiencia</p></div>
+      <div class="t-card"><div class="t-av">JC</div><h4>Javier Caballero</h4><p>Licenciado en CC. Actividad Física y Técnico Deportivo Superior Nivel III</p></div>
+      <div class="t-card"><div class="t-av">JL</div><h4>Javier de Lucas</h4><p>UEFA Pro · Máster en Entrenamiento · Análisis del Futbolista Profesional</p></div>
+      <div class="t-card"><div class="t-av">SR</div><h4>Santos Ramírez</h4><p>Ponente y especialista con amplia trayectoria en el fútbol nacional</p></div>
+      <div class="t-card"><div class="t-av">PO</div><h4>Profe Ortega</h4><p>Ponente y experto en metodología y preparación física del fútbol</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band" id="inscripcion">
+  <h2>¿LISTO PARA DAR EL SIGUIENTE PASO?</h2>
+  <p>Plazas limitadas por convocatoria. Asegura tu sitio ahora e inicia tu carrera como entrenador profesional.</p>
+  <a href="inscripcion.html" class="btn btn-n btn-lg">Inscribirme ahora →</a>
+</div>
+
+<!-- FAQ -->
+<section class="sec sec-alt" id="faq">
+  <div class="inner">
+    <div class="s-head center">
+      <div class="eyebrow">Preguntas frecuentes</div>
+      <h2 class="s-title">Todo lo que necesitas <span class="y">saber</span></h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">¿Los títulos son oficiales y reconocidos a nivel nacional? <span class="faq-icon">+</span></button><div class="faq-ans">Sí. Nuestros cursos están homologados por el Ministerio de Educación, Cultura y Deporte y la RFEF. Los títulos tienen validez en todo el territorio nacional y en países de la UE.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">¿Dónde se imparten los cursos? <span class="faq-icon">+</span></button><div class="faq-ans">Disponemos de varias sedes en España. La sede principal está en Elche (Alicante). Consulta nuestra página de sedes para ver todas las ubicaciones disponibles.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">¿Necesito experiencia previa para apuntarme? <span class="faq-icon">+</span></button><div class="faq-ans">No es necesario tener experiencia previa para el Nivel I. Cada nivel tiene sus propios requisitos de acceso. Contáctanos y te asesoramos sobre cuál es el curso más adecuado para ti.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">¿El Nivel III da acceso a la universidad? <span class="faq-icon">+</span></button><div class="faq-ans">Sí. El Técnico Deportivo Superior (Nivel III) es equivalente al Bachillerato y permite el acceso directo a estudios universitarios, con reconocimiento dentro del sistema educativo nacional.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">¿Cuándo comienza el próximo curso? <span class="faq-icon">+</span></button><div class="faq-ans">Las inscripciones abren cada temporada. Para conocer las próximas fechas de inicio y plazas disponibles, contáctanos directamente o rellena el formulario de inscripción.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- CONTACT -->
+<section class="sec" id="contacto">
+  <div class="inner">
+    <div class="s-head">
+      <div class="eyebrow">Contacto</div>
+      <h2 class="s-title">Hablemos sin <span class="y">compromiso</span></h2>
+      <p class="s-sub">¿Tienes dudas? Nuestro equipo te asesora sobre qué curso se adapta mejor a tus objetivos.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="ci"><div class="ci-ico">📞</div><div><h5>Teléfono</h5><p>638 89 55 27<br>685 45 45 69</p></div></div>
+        <div class="ci"><div class="ci-ico">✉️</div><div><h5>Email</h5><p>info@futcoach10.es</p></div></div>
+        <div class="ci"><div class="ci-ico">📍</div><div><h5>Sede principal</h5><p>C/ Emilio Sala Hernández, 3<br>03205 Elche, Alicante</p></div></div>
+        <div class="ci"><div class="ci-ico">🕐</div><div><h5>Atención</h5><p>Lunes – Viernes: 9:00 – 18:00</p></div></div>
+      </div>
+      <div>
+        <div style="font-family:var(--fh);font-size:26px;margin-bottom:20px;color:var(--yellow);">FORMULARIO DE CONTACTO</div>
+        <form class="form-box" id="contactForm">
+          <div class="form-row">
+            <div><label>Nombre</label><input type="text" name="nombre" placeholder="Tu nombre" required /></div>
+            <div><label>Apellidos</label><input type="text" name="apellidos" placeholder="Tus apellidos" /></div>
+          </div>
+          <div><label>Email</label><input type="email" name="email" placeholder="tu@email.com" required /></div>
+          <div><label>Teléfono</label><input type="tel" name="telefono" placeholder="+34 600 000 000" /></div>
+          <div>
+            <label>Curso de interés</label>
+            <select name="curso">
+              <option value="">Selecciona un curso…</option>
+              <option>Nivel I – Certificación</option>
+              <option>Nivel II – Técnico Deportivo Grado Medio</option>
+              <option>Nivel III – Técnico Deportivo Grado Superior</option>
+              <option>Preparación del portero</option>
+              <option>Director deportivo</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div><label>Mensaje (opcional)</label><textarea name="mensaje" placeholder="¿Tienes alguna pregunta específica?"></textarea></div>
+          <button type="button" class="btn btn-y" onclick="sendContact(this)" style="width:100%;justify-content:center;font-size:15px;">Enviar consulta →</button>
+          <div class="status-msg" id="contactStatus"></div>
+          <p class="form-note">Al enviar aceptas nuestra <a href="#">Política de Privacidad</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-grid">
+    <div class="f-brand">
+      <div class="logo-wrap" style="font-size:30px;margin-bottom:14px;">
+        <div class="logo-row"><span class="lw">FUTCOACH</span><span class="l10">10</span></div>
+        <span class="lsub">FORMACIÓN</span>
+      </div>
+      <p>Escuela oficial de formación de entrenadores de fútbol. Creada por profesionales, para futuros entrenadores.</p>
+    </div>
+    <div class="f-col"><h5>Cursos</h5><ul><li><a href="#cursos">Nivel I</a></li><li><a href="#cursos">Nivel II</a></li><li><a href="#cursos">Nivel III</a></li><li><a href="#cursos">Cursos extra</a></li></ul></div>
+    <div class="f-col"><h5>Escuela</h5><ul><li><a href="#nosotros">Sobre FC10</a></li><li><a href="#equipo">Equipo docente</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contacto">Sedes</a></li></ul></div>
+    <div class="f-col"><h5>Legal</h5><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Política de cookies</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Certificados</a></li></ul></div>
+  </div>
+  <div class="f-bottom">
+    <p>© 2025 FutCoach10 · Todos los derechos reservados</p>
+    <div class="soc-row">
+      <a href="https://www.facebook.com/futcoach10formacion/" target="_blank" class="soc-btn" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.79 8.43-4.94 8.43-9.94Z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/futcoach10/" target="_blank" class="soc-btn" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('mobMenu').classList.toggle('open'); }
+
+function faq(btn) {
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.faq-ans').forEach(a => a.classList.remove('open'));
+  if (!isOpen) { btn.classList.add('open'); btn.nextElementSibling.classList.add('open'); }
+}
+
+async function sendContact(btn) {
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('contactStatus');
+  const nombre = form.nombre.value.trim();
+  const email  = form.email.value.trim();
+  if (!nombre || !email) { showStatus('Por favor, completa al menos tu nombre y email.', false); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showStatus('El email introducido no es válido.', false); return; }
+
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/xkoaevjg', {
+      method:'POST', body:data, headers:{'Accept':'application/json'}
+    });
+    if (res.ok) {
+      showStatus('¡Gracias! Hemos recibido tu consulta y te responderemos pronto.', true);
+      form.reset();
+    } else {
+      showStatus('No se pudo enviar. Llámanos al 638 89 55 27.', false);
+    }
+  } catch(e) {
+    showStatus('Error de conexión. Llámanos al 638 89 55 27.', false);
+  }
+  btn.disabled = false; btn.textContent = 'Enviar consulta →';
+}
+
+function showStatus(msg, ok) {
+  const s = document.getElementById('contactStatus');
+  s.textContent = msg;
+  s.className = 'status-msg ' + (ok ? 'ok' : 'err');
+}
+</script>
+</body>
+</html>
