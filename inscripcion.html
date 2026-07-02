@@ -360,7 +360,7 @@ input.error, select.error, textarea.error { border-color: #FF4D4D; }
        Replace xkoaevjg with your Formspree ID
        ════════════════════════════════════════ -->
   <form id="inscripcionForm"
-        action="https://formspree.io/f/xkoaevjg"
+        action="https://script.google.com/macros/s/AKfycbxsbOqbWQvDYI4llWD_CXpiy8CXuNelJA9yVFNLYi0TPoCsJFWMiwXOg1_BwOVRdVqxJQ/exec"
         method="POST"
         novalidate>
 
@@ -816,30 +816,24 @@ async function handleSubmit() {
   const data = new FormData(form);
 
   try {
-    const res = await fetch('https://formspree.io/f/xkoaevjg', {
+    // Google Apps Script requires no-cors — opaque response, no exception = success
+    await fetch('https://script.google.com/macros/s/AKfycbxsbOqbWQvDYI4llWD_CXpiy8CXuNelJA9yVFNLYi0TPoCsJFWMiwXOg1_BwOVRdVqxJQ/exec', {
       method: 'POST',
       body: data,
-      headers: { 'Accept': 'application/json' }
+      mode: 'no-cors'
     });
 
     overlay.classList.remove('show');
 
-    if (res.ok) {
-      // Hide form elements, show success
-      form.style.display = 'none';
-      document.getElementById('formNav').style.display = 'none';
-      document.getElementById('steps').style.display = 'none';
-      document.querySelector('.page-header').style.display = 'none';
-      document.querySelector('.info-strip').style.display = 'none';
-      document.getElementById('successCard').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      btn.disabled = false;
-      btn.textContent = '🎯 Enviar inscripción';
-      let errMsg = 'Error desconocido';
-      try { const j = await res.json(); errMsg = j.error || errMsg; } catch(e){}
-      alert('❌ Error al enviar (' + res.status + '): ' + errMsg + '\n\nPor favor, inténtalo de nuevo o llámanos al 638 89 55 27.');
-    }
+    // Success — show confirmation screen
+    form.style.display = 'none';
+    document.getElementById('formNav').style.display = 'none';
+    document.getElementById('steps').style.display = 'none';
+    document.querySelector('.page-header').style.display = 'none';
+    document.querySelector('.info-strip').style.display = 'none';
+    document.getElementById('successCard').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   } catch (err) {
     overlay.classList.remove('show');
     btn.disabled = false;
