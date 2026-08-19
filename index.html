@@ -202,25 +202,33 @@ footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:5
 .has-drop > a { display: flex; align-items: center; gap: 5px; }
 .has-drop > a::after { content: '▾'; font-size: 10px; margin-left: 2px; }
 .dropdown {
-  display: none; position: absolute; top: calc(100% + 14px); left: 50%;
+  display: none;
+  position: absolute; top: 100%; left: 50%;
   transform: translateX(-50%);
-  background: var(--navy-d); border: 1px solid var(--border);
+  padding-top: 8px; /* bridge gap so hover doesn't break */
+  z-index: 300; min-width: 220px;
+}
+.dropdown-inner {
+  background: var(--navy-d);
+  border: 1px solid var(--border);
   border-top: 2px solid var(--yellow);
   border-radius: 0 0 var(--radius) var(--radius);
-  min-width: 210px; overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0,0,0,.5); z-index: 300;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,.6);
 }
-.has-drop:hover .dropdown { display: block; }
+/* Show on hover of the li OR when dropdown itself is hovered */
+.has-drop:hover .dropdown,
+.dropdown:hover { display: block; }
 .dropdown a {
   display: flex; align-items: center; gap: 10px;
-  padding: 12px 20px; font-size: 13px;
+  padding: 13px 20px; font-size: 13px;
   border-bottom: 1px solid var(--border);
   color: var(--off); opacity: 1;
   transition: background .15s, color .15s; white-space: nowrap;
   font-family: var(--fc); font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
 }
 .dropdown a:last-child { border-bottom: none; }
-.dropdown a:hover { background: rgba(245,200,0,.08); color: var(--yellow); }
+.dropdown a:hover { background: rgba(245,200,0,.1); color: var(--yellow); }
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
@@ -244,7 +252,7 @@ footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:5
 
 <!-- NAV -->
 <nav>
-  <a href="https://simok17.github.io/fc10demo/index.html" style="text-decoration:none;">
+  <a href="#" style="text-decoration:none;">
     <div class="logo-wrap">
       <div class="logo-row"><span class="lw">FUTCOACH</span><span class="l10">10</span></div>
       <span class="lsub">FORMACIÓN</span>
@@ -258,9 +266,11 @@ footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:5
     <li class="has-drop">
       <a href="secretaria.html">Secretaría</a>
       <div class="dropdown">
-        <a href="secretaria.html#certificados">🎓 Certificados</a>
-        <a href="secretaria.html#titulo">📄 Solicitud de Título</a>
-        <a href="secretaria.html#duplicado">📋 Duplicado</a>
+        <div class="dropdown-inner">
+          <a href="secretaria.html#certificados">🎓 Certificados</a>
+          <a href="secretaria.html#titulo">📄 Solicitud de Título</a>
+          <a href="secretaria.html#duplicado">📋 Duplicado</a>
+        </div>
       </div>
     </li>
     <li><a href="#contacto">Contacto</a></li>
