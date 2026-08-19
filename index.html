@@ -196,6 +196,32 @@ footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:5
 .soc-btn:hover { border-color:var(--yellow); color:var(--yellow); }
 .soc-btn svg { width:16px; height:16px; fill:currentColor; }
 
+
+/* ── SECRETARIA DROPDOWN ── */
+.nav-links > li { position: relative; }
+.has-drop > a { display: flex; align-items: center; gap: 5px; }
+.has-drop > a::after { content: '▾'; font-size: 10px; margin-left: 2px; }
+.dropdown {
+  display: none; position: absolute; top: calc(100% + 14px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy-d); border: 1px solid var(--border);
+  border-top: 2px solid var(--yellow);
+  border-radius: 0 0 var(--radius) var(--radius);
+  min-width: 210px; overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,.5); z-index: 300;
+}
+.has-drop:hover .dropdown { display: block; }
+.dropdown a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px; font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--off); opacity: 1;
+  transition: background .15s, color .15s; white-space: nowrap;
+  font-family: var(--fc); font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+}
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: rgba(245,200,0,.08); color: var(--yellow); }
+
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
   .nav-links{display:none;} .hamburger{display:flex;}
@@ -229,6 +255,14 @@ footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:5
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#equipo">Equipo</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li class="has-drop">
+      <a href="secretaria.html">Secretaría</a>
+      <div class="dropdown">
+        <a href="secretaria.html#certificados">🎓 Certificados</a>
+        <a href="secretaria.html#titulo">📄 Solicitud de Título</a>
+        <a href="secretaria.html#duplicado">📋 Duplicado</a>
+      </div>
+    </li>
     <li><a href="#contacto">Contacto</a></li>
     <li class="cta"><a href="inscripcion.html">Inscribirme</a></li>
   </ul>
@@ -239,6 +273,10 @@ footer { background:var(--navy-d); border-top:3px solid var(--yellow); padding:5
   <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
   <a href="#equipo" onclick="toggleMenu()">Equipo docente</a>
   <a href="#faq" onclick="toggleMenu()">Preguntas frecuentes</a>
+  <a href="secretaria.html" onclick="toggleMenu()" style="color:var(--yellow);">Secretaría</a>
+  <a href="secretaria.html#certificados" onclick="toggleMenu()" style="padding-left:20px;font-size:14px;color:var(--sky);">🎓 Certificados</a>
+  <a href="secretaria.html#titulo" onclick="toggleMenu()" style="padding-left:20px;font-size:14px;color:var(--sky);">📄 Solicitud de Título</a>
+  <a href="secretaria.html#duplicado" onclick="toggleMenu()" style="padding-left:20px;font-size:14px;color:var(--sky);">📋 Duplicado</a>
   <a href="#contacto" onclick="toggleMenu()">Contacto</a>
   <a href="inscripcion.html">→ Inscribirme ahora</a>
 </div>
